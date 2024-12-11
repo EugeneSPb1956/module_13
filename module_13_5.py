@@ -16,14 +16,15 @@ kb = ReplyKeyboardMarkup(resize_keyboard=True)
 button1 = KeyboardButton(text='Рассчитать')
 button2 = KeyboardButton(text='Информация')
 
-kb.add(button1)
-kb.add(button2)
+kb.row(
+    button1, button2
+)
 
 
-# Обработчик клавматуры
+# Обработчик клавиатуры
 @dp.message_handler(commands=['start'])
 async def start(message):
-    await message.answer('Привет!', reply_markup=kb)
+    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
 
 
 # класс, описывающий состояние пользователя
@@ -63,12 +64,7 @@ async def send_calories(message, state):
     await state.finish()
 
 
-@dp.message_handler(commands=['start'])
-async def start(message):
-    await message.answer('Привет! Я бот помогающий твоему здоровью.')
-
-
-@ dp.message_handler()
+@dp.message_handler()
 async def all_message(message):
     await message.answer('Введите команду /start, чтобы начать общение.')
 
